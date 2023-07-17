@@ -27,7 +27,7 @@ def pass_check(password):
             symkol +=1
     if bigkol != 0 and smallkol != 0 and numkol != 0 and symkol !=0:
         flag = True
-    if flag == False or len(password) <= 8:
+    if flag == False or len(password) < 8:
         return False
     else:
         return True
@@ -46,7 +46,7 @@ elif answer == 'G':
     print("Введите длину желаемого пароля:")
     length =int(input())
     password =''
-    if length <= 8:
+    if length < 8:
         print("Пароль недостаточно надёжен. Минимальная длина - 8 символов")
     else:
         while pass_check(password) != True:
