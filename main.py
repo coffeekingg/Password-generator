@@ -1,5 +1,8 @@
 import random
+from tkinter import *
+from tkinter import messagebox
 
+root = Tk()
 
 def pass_check(password):
     big = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -27,7 +30,7 @@ def pass_check(password):
     else:
         return True
 
-def btm_check():
+def btn_check():
     password = str(loginInput.get())
     if pass_check(password) == True:
         logoutOutput['text'] ="Пароль достаточно надёжен"
@@ -35,51 +38,47 @@ def btm_check():
         password = "-----"
         logoutOutput['text'] ='Пароль недостаточно надёжен'
     logoutRez['text'] = "Ваш пароль:" + password
-
-def btm_gen():
+def subscribe():
+    return messagebox.showinfo('PythonGuides','Thnak you for subscribing!')
+def btn_gen():
     big = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     small = 'abcdefghijklmnopqrstuvwxyz'
     nums = '1234567890'
     symbols = '!@#№$%^&?*()~'
     str = big + small + nums + symbols
-    length = 8
+    length = int(loginInput.get())
     password =''
-    #if length < 8:
-    #    logoutOutput['text'] ="Пароль недостаточно надёжен. Минимальная длина - 8 символов"
-    #else:
-    while pass_check(password) != True:
-        password = ''
-        password = ''.join(random.choice(str) for i in range(length))
-    logoutOutput['text'] = 'Генерация завершена'
-    logoutRez['text'] = f"Ваш пароль:{password}"
+    if length < 8:
+        logoutOutput['text'] ="Пароль недостаточно надёжен. Минимальная длина - 8 символов"
+    else:
+        while pass_check(password) != True:
+            password = ''
+            password = ''.join(random.choice(str) for i in range(length))
+        logoutOutput['text'] = 'Генерация завершена'
+        logoutRez['text'] = f"Ваш пароль:{password}"
 
-
-from tkinter import *
-
-root = Tk()
 
 
 root.title("Генератор паролей")
 root.geometry("700x450+700+290")
-root.resizable(True, True)
+root.resizable(False, False)
 
 
+frame1= Frame(root, bg = '#ffb300', bd = 5)
+frame1.place(relx = 0.1, rely = 0.1, relwidth=0.8, relheight=0.5)
 
-frame = Frame(root, bg = '#ffb300', bd = 5)
-frame.place(relx = 0.1, rely = 0.1, relwidth=0.8, relheight=0.5)
-
-title = Label(frame, text = "Вы хотите проверить свой пароль или сгенерировать?\n"
+title = Label(frame1, text = "Вы хотите проверить свой пароль или сгенерировать?\n"
                             "Для проверки введите пароль и нажмите кнопку\n"
                             "Для генерации введите длину и нажмите кнопку\n"
                             "Минимальная длина пароля 8 символов"
 
-                           , bg = "white", font = 40, relief = RAISED)
+                            , bg = "white", font = 40, relief = RAISED)
 title.place(x = 70, y = 10)
 
 frame2 = Frame(root, bg = '#ffb700', bd = 5)
 frame2.place(relx = 0.1, rely = 0.7, relwidth= 0.8, relheight=0.25)
 
-loginInput = Entry(frame, bg ='white')
+loginInput = Entry(frame1, bg ='white')
 loginInput.place(x = 170, y = 175,  width=170)
 
 logoutOutput = Label(frame2, text = 'Результаты проверки / генерации пароля', font = 40, width=40, height=3, relief = RAISED)
@@ -87,11 +86,12 @@ logoutOutput.pack()
 
 logoutRez = Label(frame2, text = 'Пароль', font = 40, width=40, height=3, relief = RAISED)
 logoutRez.pack()
-
-btn1 = Button(frame, text = "Проверить пароль", font = 40, command = btm_check() )
+#
+btn1 = Button(frame1, text = "Проверить пароль", font = 40, command = lambda: btn_check() )
 btn1.place(x = 70, y = 115, width= 200)
 
-#btn2 = Button(frame, text = "Сгенерировать пароль", font = 40, command = btm_gen() )
-#btn2.place(x = 290, y = 115)
+btn2 = Button(frame1, text = "Сгенерировать пароль", font = 40, command = lambda: btn_gen() )
+btn2.place(x = 290, y = 115)
+
 
 root.mainloop()
