@@ -38,8 +38,7 @@ def btn_check():
         password = "-----"
         logoutOutput['text'] ='Пароль недостаточно надёжен'
     logoutRez['text'] = "Ваш пароль:" + password
-def subscribe():
-    return messagebox.showinfo('PythonGuides','Thnak you for subscribing!')
+
 def btn_gen():
     big = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     small = 'abcdefghijklmnopqrstuvwxyz'
